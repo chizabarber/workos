@@ -3,3 +3,5 @@
 First commit
 
 Corrected redirectURI to Render URL
+
+Added Directory Sync routes and views

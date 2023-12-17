@@ -2,6 +2,7 @@ import express from 'express'
 import session from 'express-session'
 import { WorkOS } from '@workos-inc/node'
 
+
 const app = express()
 const router = express.Router()
 
@@ -17,16 +18,33 @@ app.use(
 const workos = new WorkOS(process.env.WORKOS_API_KEY)
 const clientID = process.env.WORKOS_CLIENT_ID
 const organizationID = 'org_01HHSZ5AP6ZWFACEM5816ZPE30'
-const redirectURI = 'https://workos.onrender.com/callback'
+const redirectURI = 'http://localhost:8000/callback'
 const state = ''
 
-router.get('/', function (req, res) {
+router.get('/', async (req, res) => {
     if (session.isloggedin) {
-        res.render('login_successful.ejs', {
-            profile: session.profile,
-            first_name: session.first_name,
-            last_name: session.last_name
-        })
+      let before = req.query.before
+      let after = req.query.after
+  
+      const directories = await workos.directorySync.listDirectories({
+          limit: 5,
+          before: before,
+          after: after,
+          order: null,
+      })
+  
+      before = directories.listMetadata.before
+      after = directories.listMetadata.after
+  
+      res.render('login_successful.ejs', {
+          title: 'Home',
+          directories: directories.data,
+          before: before,
+          after: after,
+          profile: session.profile,
+          first_name: session.first_name,
+          last_name: session.last_name
+      })
     } else {
         res.render('index.ejs', { title: 'Home' })
     }
@@ -75,6 +93,26 @@ router.get('/callback', async (req, res) => {
     } catch (error) {
         res.render('error.ejs', { error: error })
     }
+})
+
+router.get('/directory', async (req, res) => {
+  const directories = await workos.directorySync.listDirectories()
+  const directory = directories.data.filter((directory) => {
+      return directory.id == req.query.id
+  })[0]
+  res.render('directory.ejs', {
+      directory: directory,
+      title: 'Directory',
+  })
+})
+
+router.get('/users', async (req, res) => {
+  const directoryId = req.query.id
+  const users = await workos.directorySync.listUsers({
+      directory: directoryId,
+      limit: 100,
+  })
+  res.render('users.ejs', { users: users.data })
 })
 
 router.get('/logout', async (req, res) => {
