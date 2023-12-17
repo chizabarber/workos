@@ -4,7 +4,7 @@ An example application demonstrating how to use the [WorkOS Node.js SDK](https:/
 
 ## Access the deployed app
 
-[Example App with SSO and Directory Sync on Render](https://workos.onrender.com)
+<a href="https://workos.onrender.com target="_blank">Example App with SSO and Directory Sync on Render</a>
 
 ### Login with SSO
 
@@ -61,7 +61,7 @@ Upon logging in successfully, you will see the User Greeting dynamically rendere
 
 Create a `.env` file at the project root, and store them like so:
 
-    ```bash
+    ```
     WORKOS_API_KEY=sk_xxxxxxxxxxxxx
     WORKOS_CLIENT_ID=project_xxxxxxxxxxxx
     WORKOS_ORG_ID=org_xxxxxxxxxxxx
