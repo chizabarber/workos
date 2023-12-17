@@ -4,7 +4,7 @@ An example application demonstrating how to use the [WorkOS Node.js SDK](https:/
 
 ## Access the deployed app
 
-<a href="https://workos.onrender.com target="_blank">Example App with SSO and Directory Sync on Render</a>
+<a href="https://workos.onrender.com" target="_blank">Example App with SSO and Directory Sync on Render</a>
 
 ### Login with SSO
 
