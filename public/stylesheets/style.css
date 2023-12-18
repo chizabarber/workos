@@ -473,16 +473,19 @@ th {
 }
 
 .google_button {
-background-image: url("../images/google-button.png");
-background-size: cover;
+  background-image: url("../images/google-button.png");
+  background-size: cover;
+  cursor: pointer;
 }
 
 .microsoft_button {
-background-image: url("../images/microsoft-button.png");
-background-size: cover;
+  background-image: url("../images/microsoft-button.png");
+  background-size: cover;
+  cursor: pointer;
 }
 
 .saml_button {
-background-image: url("../images/saml-button.png");
-background-size: cover;
+  background-image: url("../images/saml-button.png");
+  background-size: cover;
+  cursor: pointer;
 }
